@@ -1,5 +1,6 @@
 # 11 Container With Most Water
 # https://leetcode.com/problems/container-with-most-water/
+# solution time complexity: O(n) time 
 
 def maxArea(height):
     l = 0
