@@ -1,3 +1,6 @@
+# 219 Contains Duplicate II 
+# https://leetcode.com/problems/contains-duplicate-ii/
+
 def containsNearbyDuplicate(nums, k):
     Dict = {}
     l = 0
