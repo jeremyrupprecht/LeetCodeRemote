@@ -2,10 +2,12 @@
 # https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/
 
 def numOfSubarrays(arr, k, threshold):
-    from statistics import mean 
     runningSum = 0
     numberOfSubarrays = 0
     l = 0
+    # mean = runningSum / k where runningSum is the sum of 
+    # the current window, when the window slides (r and l move)
+    # the running Sum is updated accordingly 
     for r in range(len(arr)):
         runningSum += arr[r]
         if (r - l) >= k:
