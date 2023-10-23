@@ -24,7 +24,7 @@ def minSubArrayLen(target, nums):
         return 0
     else:
         return minLength
-
+ 
 
 if __name__ == "__main__":
     nums = [2,3,1,2,4,3]
