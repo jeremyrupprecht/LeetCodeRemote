@@ -20,6 +20,7 @@ def topKFrequent(nums, k):
 
     mostFrequentElements = []
     endOfBucketSortList = len(bucketSortList) - 1
+    print(endOfBucketSortList)
     while (k > 0 and endOfBucketSortList > 0):
 
         if not bucketSortList[endOfBucketSortList]:
@@ -29,7 +30,7 @@ def topKFrequent(nums, k):
         for n in bucketSortList[endOfBucketSortList]:
             mostFrequentElements.append(n)
             k -= 1
-            
+
         endOfBucketSortList -= 1
 
     return mostFrequentElements
