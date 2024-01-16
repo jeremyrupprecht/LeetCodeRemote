@@ -27,6 +27,7 @@ def threeSum(nums):
                 # and a new 3 number pair will be created anyways, so only moving 
                 # one pointer is sufficient
                 p2 += 1
+                print(p1, p2, p3, nums[p1], nums[p2], nums[p3])
                 while nums[p2] == nums[p2-1] and p2 < p3:
                     p2 += 1
             # conditionally change the total
@@ -39,5 +40,6 @@ def threeSum(nums):
 if __name__ == "__main__":
 
     nums = [-1,0,1,2,-1,-4]
-    print(threeSum(nums))
+    nums2 = [-3,3,4,-3,1,2,1,1,1,1,-3,3,4,-3,1,2]
+    print(threeSum(nums2))
     
