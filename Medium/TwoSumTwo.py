@@ -14,7 +14,6 @@ def twoSum(numbers, target):
             r -= 1
     return []
 
-
 if __name__ == "__main__":
 
     nums = [2,7,11,15]
