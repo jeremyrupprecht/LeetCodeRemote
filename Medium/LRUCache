@@ -1,0 +1,78 @@
+class Node:
+    def __init__(self, key, val):
+        self.key = key
+        self.val = val
+        self.next = None
+        self.prev = None
+
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        self.Dict = {}              # map key to node
+        self.capacity  = capacity 
+        self.left = Node(0,0)
+        self.right = Node(0,0)
+        # dummy nodes --> init to zero --> these nodes allow for 
+        # ez access to the front and back of the list at all times
+        # new nodes would be put inbetween these nodes
+        # 
+        #   left --> otherNode1(LRU) --> otherNode2 --> ...(MRU) --> right
+        #
+        # LRU: left, MRU: right     RIGHT IS THE FRONT
+        self.left.next = self.right
+        self.right.prev = self.left
+    
+    # remove node from LEFT (right after left pointer)
+    def remove(self, node):
+        # get prev and next nodes from node --> make them 
+        # point to each other to cancel out node
+        prev = node.prev
+        nxt = node.next
+
+        prev.next = nxt
+        nxt.prev = prev
+
+    # insert node on the RIGHT (right before right pointer)
+    def insert(self, node):
+        # get right node (and it's previous node, the current
+        # MRU node) then put the new node between them
+        prev = self.right.prev
+        nxt = self.right
+
+        prev.next = node
+        node.prev = prev
+
+        node.next = nxt
+        nxt.prev = node
+
+
+    def get(self, key):
+        if key in self.Dict:
+            # move node to front
+            self.remove(self.Dict[key])
+            self.insert(self.Dict[key])
+            # return node's value
+            return self.Dict[key].val
+        return -1
+        
+    def put(self, key, value):
+        if key in self.Dict: 
+            # remove old node (part of moving node to front)
+            self.remove(self.Dict[key])
+
+        # update dict
+        self.Dict[key] = Node(key, value)
+        # insert new node at front
+        self.insert(self.Dict[key])
+        
+        if len(self.Dict) > self.capacity: 
+            # remove LRU node (left.next b/c left.next always points 
+            # the LRU, see diagram above)
+            lru = self.left.next
+            self.remove(lru)
+            self.Dict.pop(lru.key, None)
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)
